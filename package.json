@@ -1,0 +1,30 @@
+{
+  "name": "fluxy",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint . --format json -o reports/eslint-report.json"
+  },
+  "bin": {
+    "fluxy": "./bin/cli.js"
+  },
+  "keywords": [
+    "fluxy"
+  ],
+  "author": "Blazexsam",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "cloc": "^2.2.0-cloc",
+    "commander": "^12.1.0",
+    "express": "^4.21.0",
+    "madge": "^8.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.12.0",
+    "eslint": "^9.12.0",
+    "eslint-plugin-react": "^7.37.1",
+    "globals": "^15.10.0"
+  }
+}

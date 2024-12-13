@@ -15,11 +15,16 @@ program
       .then(() => {
         console.log("Analysis completed, starting dashboard...", options);
 
-        // serveDashboard(options?.port);
+        serveDashboard(options?.port);
       })
       .catch((error) => {
         console.error("Error running analysis:", error);
       });
+  })
+  .command("reload server")
+  .description("Reload the server with all the new changes")
+  .action(() => {
+    serveDashboard();
   });
 
 program.parse(process.argv);

@@ -76,7 +76,7 @@ const StatisticsCard: React.FC<StatisticsCardProp> = ({
         </StatsPercentage>
 
         <ContentBox>
-          <Typography variant="h6" component="div" fontWeight={"bold"}>
+          <Typography variant="body1" component="div" fontWeight={"bold"}>
             {title}
           </Typography>
           <Typography variant="h4" color="textSecondary">

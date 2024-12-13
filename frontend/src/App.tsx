@@ -1,11 +1,15 @@
 import "./App.css";
 import Dashboard from "./views/Dashboard";
+import { Provider } from "react-redux";
+import { store } from "./store";
 
 function App() {
   return (
-    <main>
-      <Dashboard />
-    </main>
+    <Provider store={store}>
+      <main>
+        <Dashboard />
+      </main>
+    </Provider>
   );
 }
 

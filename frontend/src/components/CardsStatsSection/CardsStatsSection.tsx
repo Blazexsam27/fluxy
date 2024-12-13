@@ -7,68 +7,89 @@ import TrendingDownIcon from "@mui/icons-material/TrendingDown";
 import CodeIcon from "@mui/icons-material/Code";
 
 import analysisReportObject from "../../../../reports/eslint-report.json";
-import utils from "../../utils/utils";
+import reportServices from "../../services/report.services";
+import { setReportObjectList } from "../../features/report";
+import { useDispatch } from "react-redux";
 
 const StatisticsSection: React.FC = () => {
+  const dispatch = useDispatch();
   // States
   const [errorCountObj, setErrorCountObj] = useState({
     errorCount: 0,
     fatalErrorCount: 0,
     fixableErrorCount: 0,
   });
+  const [warningCountObj, setWarningCountObj] = useState({
+    warningCount: 0,
+    fixableWarningCount: 0,
+  });
 
   let errorCountValue =
     errorCountObj.errorCount +
     errorCountObj.fatalErrorCount +
     errorCountObj.fixableErrorCount;
+
+  let warningCountValue =
+    warningCountObj.warningCount + warningCountObj.fixableWarningCount;
   const statisticsData = [
     {
       title: "Error Count",
       value: errorCountValue,
       percentage: 12,
-      description: "Error count in current codebase",
+      description: "Total error count in current codebase",
       icon: <CodeIcon />,
       iconBgColor: "#0be881",
     },
     {
-      title: "Expenses",
-      value: errorCountValue,
+      title: "Fatal Error Count",
+      value: errorCountObj.fatalErrorCount,
       percentage: 8.2,
-      description: "Total expenses for the month",
+      description: "Total fatal errors count in current codebase",
       icon: <TrendingDownIcon />,
       iconBgColor: "#0be881",
     },
     {
-      title: "Investment",
-      value: errorCountValue,
+      title: "Warning Count",
+      value: warningCountObj.warningCount,
       percentage: -6.3,
-      description: "Net investment for the month",
+      description: "Total warning count in current codebase",
       icon: <TrendingUpIcon />,
       iconBgColor: "#f53b57",
     },
     {
-      title: "Net Profit",
-      value: errorCountValue,
+      title: "Fatal Warning Count",
+      value: warningCountObj.fixableWarningCount,
       percentage: 6.9,
-      description: "Net profit for the month",
+      description: "Total fixable warning count in current codebase",
       icon: <TrendingUpIcon />,
       iconBgColor: "#0be881",
     },
     // Add more statistics as needed
   ];
 
-  const getErrorCountObject = useCallback(() => {
+  const getFilteredAnalysisReport = useCallback(() => {
     console.log(analysisReportObject);
     try {
-      const errorCountObject = utils.getTotalErrors(analysisReportObject);
+      const filteredAnalysisReport =
+        reportServices.removeZeroErrorCountObjects(analysisReportObject);
+      dispatch(setReportObjectList(filteredAnalysisReport));
+
+      const errorCountObject = reportServices.getErrorCountObject(
+        filteredAnalysisReport
+      );
+      const warningCountObject = reportServices.getWarningCountObject(
+        filteredAnalysisReport
+      );
+
       setErrorCountObj(errorCountObject);
+      setWarningCountObj(warningCountObject);
     } catch (error) {
       console.error("Error occured", error);
     }
   }, [analysisReportObject, errorCountObj]);
 
   useEffect(() => {
-    getErrorCountObject();
+    getFilteredAnalysisReport();
   }, []);
 
   return (
@@ -77,8 +98,8 @@ const StatisticsSection: React.FC = () => {
         <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={index}>
           <StatisticsCard
             title={stat.title}
-            value={stat.value}
-            percentage={stat.percentage}
+            value={errorCountValue}
+            percentage={warningCountValue}
             description={stat.description}
             icon={stat.icon}
             iconBgColor={stat.iconBgColor}

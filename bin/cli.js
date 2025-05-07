@@ -20,11 +20,14 @@ program
       .catch((error) => {
         console.error("Error running analysis:", error);
       });
-  })
+  });
+
+program
   .command("reload server")
   .description("Reload the server with all the new changes")
-  .action(() => {
-    serveDashboard();
+  .option("-p, --port <port>", "Port to run the dashboard on", "8080")
+  .action((path, options) => {
+    serveDashboard(options?.port);
   });
 
 program.parse(process.argv);

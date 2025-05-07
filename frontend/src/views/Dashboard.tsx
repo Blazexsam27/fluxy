@@ -24,13 +24,26 @@ function Dashboard() {
           </Typography>
           <CardsStatsSection />
 
+          {/* Error Table */}
+          <Typography
+            className="text-gray-600"
+            align="center"
+            variant="h5"
+            fontWeight={"bold"}
+            mt={5}
+            textTransform={"uppercase"}
+          >
+            Error Table
+          </Typography>
+          <ErrorTable />
+
           {/* Codebase stats and info */}
           <Typography
             className="text-gray-600"
             align="center"
             variant="h5"
             fontWeight={"bold"}
-            mt={4}
+            mt={5}
             textTransform={"uppercase"}
           >
             Codebase Information
@@ -38,18 +51,6 @@ function Dashboard() {
           <CodebaseStats />
 
           <ChartsSection />
-          {/* Error Table */}
-          <Typography
-            className="text-gray-600"
-            align="center"
-            variant="h5"
-            fontWeight={"bold"}
-            mt={4}
-            textTransform={"uppercase"}
-          >
-            Error Table
-          </Typography>
-          <ErrorTable />
         </Box>
       </Container>
     </Box>

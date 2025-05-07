@@ -4,6 +4,8 @@ const { program } = require("commander");
 const analyze = require("../lib/analyze");
 const process = require("process");
 const { serveDashboard } = require("../lib/server");
+const { execSync } = require("child_process");
+const p = require("path");
 
 program
   .command("analyze [path]")
@@ -13,6 +15,14 @@ program
     const projectPath = path || "./";
     analyze(projectPath)
       .then(() => {
+        console.log("Analysis completed, (re)-building dashboard...");
+        // rebuild frontend
+        execSync("npm run build", {
+          stdio: "inherit",
+          shell: true,
+          cwd: p.resolve(__dirname, "../frontend"),
+        });
+
         console.log("Analysis completed, starting dashboard...", options);
 
         serveDashboard(options?.port);
@@ -27,6 +37,25 @@ program
   .description("Reload the server with all the new changes")
   .option("-p, --port <port>", "Port to run the dashboard on", "8080")
   .action((path, options) => {
+    console.log("Analysis completed, (re)-building dashboard...");
+
+    // rebuild frontend
+    execSync("npm run build", {
+      stdio: "inherit",
+      shell: true,
+      cwd: p.resolve(__dirname, "../frontend"),
+    });
+
+    console.log("Analysis completed, starting dashboard...", options);
+    serveDashboard(options?.port);
+  });
+
+program
+  .command("serve")
+  .description("Start the fluxy server and dashboard")
+  .option("-p, --port <port>", "Port to run the dashboard on", "8080")
+  .action((options) => {
+    console.log("Starting dashboard...", options);
     serveDashboard(options?.port);
   });
 

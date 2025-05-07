@@ -11,7 +11,12 @@ function ErrorTable() {
   return (
     <Container
       maxWidth={false}
-      sx={{ height: "70vh", overflow: "auto", marginBlock: "2rem" }}
+      sx={{
+        height: "70vh",
+        overflow: "auto",
+        marginBlock: "1rem",
+        marginBottom: "5rem",
+      }}
     >
       <CollapsibleTable dataList={errorObjectList} />;
     </Container>

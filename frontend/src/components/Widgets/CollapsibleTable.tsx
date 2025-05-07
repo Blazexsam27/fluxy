@@ -20,16 +20,7 @@ interface CollapsibleTableProps {
 function Row({ row }: { row: any }) {
   const [open, setOpen] = React.useState(false);
 
-  const { line, message, severity } = row.messages;
-  // const { filePath } = row;
-  // const calculateTotal = (dataRow: any) => {
-  //   try {
-  //     let result = 0;
-  //     return result;
-  //   } catch (error) {
-  //     console.error("Error while calculating total");
-  //   }
-  // };
+  const { line, severity } = row.messages;
 
   return (
     <React.Fragment>
@@ -48,35 +39,19 @@ function Row({ row }: { row: any }) {
         </TableCell>
         <TableCell align="left">{row.filePath}</TableCell>
         <TableCell align="left">{line}</TableCell>
-        <TableCell align="left">{message}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1 }}>
-              {/* <Typography variant="h6" gutterBottom component="div">
-                History
-              </Typography>
-              <Table size="small" aria-label="purchases">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Date</TableCell>
-                    <TableCell>Customer</TableCell>
-                    <TableCell align="left">Amount</TableCell>
-                    <TableCell align="left">Total price ($)</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  <TableRow>
-                    <TableCell component="th" scope="row">
-                      {filePath}
-                    </TableCell>
-                    <TableCell>{line}</TableCell>
-                    <TableCell align="left">{line}</TableCell>
-                    <TableCell align="left">{message}</TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table> */}
+            <Box
+              sx={{
+                margin: 1,
+                paddingLeft: 11.5,
+                fontWeight: "bold",
+                color: `${row?.messages?.severity === 2 ? "red" : "orange"}`,
+              }}
+            >
+              {row?.messages?.message}
             </Box>
           </Collapse>
         </TableCell>
@@ -98,9 +73,6 @@ export default function CollapsibleTable({ dataList }: CollapsibleTableProps) {
             </TableCell>
             <TableCell align="left" sx={{ color: "#fff" }}>
               Line Number
-            </TableCell>
-            <TableCell align="left" sx={{ color: "#fff" }}>
-              Message
             </TableCell>
           </TableRow>
         </TableHead>

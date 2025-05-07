@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint . --format json -o reports/eslint-report.json"
+    "lint": "eslint . --format json -o reports/eslint-report.json",
+    "serve": "node lib/server.js"
   },
   "bin": {
     "fluxy": "./bin/cli.js"

@@ -62,21 +62,6 @@ fluxy dashboard
 fluxy analyze --dashboard
 ```
 
-### Advanced Usage
-```bash
-# Custom configuration
-fluxy analyze --config ./fluxy.config.js
-
-# Export results
-fluxy analyze --export json --output ./reports/
-
-# Watch mode for continuous analysis
-fluxy watch ./src
-
-# Specific file types only
-fluxy analyze --include "*.js,*.ts,*.jsx,*.tsx"
-```
-
 
 ## 📊 Dashboard Features
 

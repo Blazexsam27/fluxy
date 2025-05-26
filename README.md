@@ -2,7 +2,8 @@
 
 A powerful npm package that analyzes your codebase and provides a comprehensive dashboard with detailed statistics and insights. Built with React.js and Material-UI, Fluxy helps developers understand their code quality, identify issues, and optimize their projects.
 
-[![npm version](https://badge.fury.io/js/fluxy.svg)](https://badge.fury.io/js/fluxy)
+
+[![npm Beta version](https://badge.fury.io/js/fluxy.svg)](https://www.npmjs.com/package/@blazexsam/fluxy)
 [![Downloads](https://img.shields.io/npm/dm/fluxy.svg)](https://npmjs.com/package/fluxy)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
